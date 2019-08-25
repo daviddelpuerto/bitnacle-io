@@ -1,0 +1,28 @@
+{
+  "name": "bitnacle-io",
+  "version": "1.0.0-alpha",
+  "description": "Dead simple logger middleware to use with socket.io apps",
+  "author": "David del Puerto Martín <ddelpuertomartin@gmail.com> (https://github.com/daviddelpuerto)",
+  "main": "./index.js",
+  "homepage": "https://github.com/daviddelpuerto/bitnacle-io",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/daviddelpuerto/bitnacle-io"
+  },
+  "keywords": [
+    "bitnacle",
+    "bitnacle-io",
+    "log",
+    "logger",
+    "middleware",
+    "socket.io",
+    "json"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "bitnacle-express": "^1.0.1-beta"
+  }
+}
