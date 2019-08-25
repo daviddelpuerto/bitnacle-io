@@ -30,13 +30,13 @@ io.listen(3000);
 If you want to **skip** some events, you can do it by passing an array of event names to ```bitnacle-io``` and they won't be logged:
 
 ```javascript
-    socket.use(bitnacleIo({
-        exclude: [
-            'event_name',
-            'another_event_name',
-            'yet_another_event_name'
-        ]
-    }));
+socket.use(bitnacleIo({
+    exclude: [
+        'event_name',
+        'another_event_name',
+        'yet_another_event_name'
+    ]
+}));
 ```
 
 
@@ -45,9 +45,9 @@ If you want to **skip** some events, you can do it by passing an array of event 
 ```bitnacle-io``` uses 2 formats, ```simple``` (default) and ```json```.
 
 ```javascript
-    socket.use(bitnacleIo({
-        format: 'json' // optional: default is "simple"
-    }));
+socket.use(bitnacleIo({
+    format: 'json' // optional: default is "simple"
+}));
 ```
 
 ### ```simple``` format output:
