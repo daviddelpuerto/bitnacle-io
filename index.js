@@ -6,7 +6,7 @@ const isEventExcluded = function(eventName, options) {
     if (!eventName) return false;
     if (options && options.exclude && options.exclude.includes(eventName)) return true; 
     else return false;
-}
+};
 
 module.exports = function(options = {}) {
 
@@ -32,18 +32,18 @@ module.exports = function(options = {}) {
             const time = bitnacleTimer.getRequestTime();
     
             if (options.format && options.format === 'json') {
-                process.stdout.write(`${JSON.stringify({ time, eventData })}\n`)
+                process.stdout.write(`${JSON.stringify({ time, eventData })}\n`);
             } else {
                 process.stdout.write(`[${time}] ${JSON.stringify(eventData)}\n`);
             }    
     
             next();
     
-        }
+        };
         
     } catch (err) {
         process.stdout.write('An error on bitnacle-io occurred, please report this error');
         process.stderr.write(err);   
     }
 
-}
+};

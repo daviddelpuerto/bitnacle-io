@@ -19,10 +19,14 @@
     "json"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint index.js --fix"
   },
   "license": "MIT",
   "dependencies": {
     "bitnacle-helpers": "^1.1.4"
+  },
+  "devDependencies": {
+    "eslint": "^6.5.1"
   }
 }
