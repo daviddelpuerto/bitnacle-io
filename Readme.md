@@ -1,8 +1,12 @@
 # bitnacle-io
 
-```bitnacle-io``` is a dead simple middleware logger to use with [socket.io](https://www.npmjs.com/package/socket.io).
+[![Build Status](https://travis-ci.org/daviddelpuerto/bitnacle-io.svg?branch=master)](https://travis-ci.org/daviddelpuerto/bitnacle-io)
+[![Coverage Status](https://coveralls.io/repos/github/daviddelpuerto/bitnacle-io/badge.svg?branch=master)](https://coveralls.io/github/daviddelpuerto/bitnacle-io?branch=master)
+![David](https://img.shields.io/david/daviddelpuerto/bitnacle-io)
+![David](https://img.shields.io/david/dev/daviddelpuerto/bitnacle-io)
+![npm](https://img.shields.io/npm/v/bitnacle-io)
 
-> **NOTE**: ```bitnacle-io``` is under development, this is a very basic implementation but works for the purpose. New features are being added and the first version will be _**released** during **september 2019**_.
+```bitnacle-io``` is a dead simple middleware logger to use with [socket.io](https://www.npmjs.com/package/socket.io).
 
 ## Installation
 
