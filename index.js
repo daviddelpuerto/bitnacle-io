@@ -10,40 +10,33 @@ const isEventExcluded = function(eventName, options) {
 
 module.exports = function(options = {}) {
 
-    try {
-
-        if (options.constructor.name !== 'Object') {
-            throw new Error('It seems you are using bitnacleIo middleware this way "app.use(binacleIo)", but it should be used "app.use(bitnacleIo())".');
-        }
-    
-        if (typeof options !== 'object') {
-            throw new Error('Invalid argument type, you must pass and object');
-        }
-        
-        return function(eventData, next) {    
-    
-            if (Object.entries(options).length && options.exclude && !Array.isArray(options.exclude)) {
-                throw new Error('Invalid argument type, exclude property must be an array');
-            }
-
-            const eventName = Object.values(eventData)[0];
-            if (isEventExcluded(eventName, options)) return;
-    
-            const time = bitnacleTimer.getRequestTime();
-    
-            if (options.format && options.format === 'json') {
-                process.stdout.write(`${JSON.stringify({ time, eventData })}\n`);
-            } else {
-                process.stdout.write(`[${time}] ${JSON.stringify(eventData)}\n`);
-            }    
-    
-            next();
-    
-        };
-        
-    } catch (err) {
-        process.stdout.write('An error on bitnacle-io occurred, please report this error');
-        process.stderr.write(err);   
+    if (options.constructor.name !== 'Object') {
+        throw new Error('It seems you are using bitnacleIo middleware this way "app.use(binacleIo)", but it should be used "app.use(bitnacleIo())".');
     }
 
+    if (typeof options !== 'object') {
+        throw new Error('Invalid argument type, you must pass and object');
+    }
+    
+    return function(eventData, next) {    
+
+        if (Object.entries(options).length && options.exclude && !Array.isArray(options.exclude)) {
+            throw new Error('Invalid argument type, exclude property must be an array');
+        }
+
+        const eventName = Object.values(eventData)[0];
+        if (isEventExcluded(eventName, options)) return;
+
+        const time = bitnacleTimer.getRequestTime();
+
+        if (options.format && options.format === 'json') {
+            process.stdout.write(`${JSON.stringify({ time, eventData })}\n`);
+        } else {
+            process.stdout.write(`[${time}] ${JSON.stringify(eventData)}\n`);
+        }    
+
+        next();
+
+    };
+        
 };
