@@ -1,7 +1,6 @@
 # bitnacle-io
 
 [![Build Status](https://travis-ci.org/daviddelpuerto/bitnacle-io.svg?branch=master)](https://travis-ci.org/daviddelpuerto/bitnacle-io)
-[![Coverage Status](https://coveralls.io/repos/github/daviddelpuerto/bitnacle-io/badge.svg?branch=master)](https://coveralls.io/github/daviddelpuerto/bitnacle-io?branch=master)
 ![David](https://img.shields.io/david/daviddelpuerto/bitnacle-io)
 ![David](https://img.shields.io/david/dev/daviddelpuerto/bitnacle-io)
 ![npm](https://img.shields.io/npm/v/bitnacle-io)
