@@ -1,9 +1,17 @@
-const { bitnacleTimer } = require('bitnacle-helpers');
+const { bitnacleTimer, bitnacleUtils } = require('bitnacle-helpers');
 
 function isEventExcluded(eventName, options) {
   if (!eventName) return false;
   if (options && options.exclude && options.exclude.includes(eventName)) return true;
   return false;
+}
+
+function logToStreams(streams = [], message) {
+  if (streams.length) {
+    streams.forEach((stream) => {
+      stream.write(message);
+    });
+  }
 }
 
 module.exports = (options = {}) => {
@@ -13,6 +21,17 @@ module.exports = (options = {}) => {
 
   if (options.constructor.name !== 'Object') {
     throw new Error('It seems you are using bitnacleIo middleware this way "app.use(binacleIo)", but it should be used "app.use(bitnacleIo())".');
+  }
+
+  let appStreams = [];
+
+  const { streams } = options;
+
+  if (streams && streams.length) {
+    appStreams = streams.map((appStream, index) => {
+      if (bitnacleUtils.isWritableStream(appStream)) return appStream;
+      throw new Error(`stream[${index}] is not a writable stream\n`);
+    });
   }
 
   return (eventData, next) => {
@@ -26,9 +45,13 @@ module.exports = (options = {}) => {
     const time = bitnacleTimer.getRequestTime();
 
     if (options.format && options.format === 'json') {
-      process.stdout.write(`${JSON.stringify({ time, eventData })}\n`);
+      const logMessage = `${JSON.stringify({ time, eventData })}\n`;
+      process.stdout.write(logMessage);
+      logToStreams(appStreams, logMessage);
     } else {
-      process.stdout.write(`[${time}] ${JSON.stringify(eventData)}\n`);
+      const logMessage = `[${time}] ${JSON.stringify(eventData)}\n`;
+      process.stdout.write(logMessage);
+      logToStreams(appStreams, logMessage);
     }
 
     next();
