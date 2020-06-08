@@ -1,7 +1,8 @@
 const fs = require('fs');
 const { expect } = require('chai');
-const { stdout, stderr } = require('test-console');
 const bitnacleIo = require('../index');
+
+const LOG_FILE = './test/sample.log';
 
 describe('#bitnacleIo()', function() {
 
@@ -23,28 +24,20 @@ describe('#bitnacleIo()', function() {
 
     it('should throw if options.streams includes non writable streams', function() {
         expect(() => bitnacleIo({
-            streams: [
-                'Invalid stream'
-            ]
+            streams: [ 'Invalid stream' ]
         })).to.throw();
 
-        const sampleLogFile = './sample.log';
-        fs.writeFileSync(sampleLogFile);
-        const readableStream = fs.createReadStream(sampleLogFile);
+        const readableStream = fs.createReadStream(LOG_FILE);
 
         expect(() => bitnacleIo({
-            streams: [
-                readableStream
-            ]
+            streams: [ readableStream ]
         })).to.throw();
 
         readableStream._write = () => {};
         readableStream._writableState = 'fake prop'
 
         expect(() => bitnacleIo({
-            streams: [
-                readableStream
-            ]
+            streams: [ readableStream ]
         })).to.throw();
     });
 });
