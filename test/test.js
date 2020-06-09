@@ -4,6 +4,8 @@ const bitnacleIo = require('../index');
 
 const LOG_FILE = './test/sample.log';
 
+fs.writeFileSync(LOG_FILE);
+
 describe('#bitnacleIo()', () => {
   it('should return a function', () => {
     expect(bitnacleIo()).to.be.a('function');
