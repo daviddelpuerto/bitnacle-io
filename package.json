@@ -19,6 +19,7 @@
     "json"
   ],
   "scripts": {
+    "lint": "eslint index.js ./test --fix",
     "test": "eslint index.js --fix && nyc --reporter=html mocha"
   },
   "license": "MIT",
