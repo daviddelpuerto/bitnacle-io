@@ -4,40 +4,39 @@ const bitnacleIo = require('../index');
 
 const LOG_FILE = './test/sample.log';
 
-describe('#bitnacleIo()', function() {
+describe('#bitnacleIo()', () => {
+  it('should return a function', () => {
+    expect(bitnacleIo()).to.be.a('function');
+  });
 
-    it('should return a function', function() {
-        expect(bitnacleIo()).to.be.a('function');
-    });
+  it('should throw if options is not an object', () => {
+    expect(() => bitnacleIo('')).to.throw();
+  });
 
-    it('should throw if options is not an object', function() {
-        expect(() => bitnacleIo('')).to.throw();
-    });
+  it('should throw if not initialized correctly', () => {
+    expect(() => bitnacleIo({
+      constructor: {
+        name: '',
+      },
+    })).to.throw();
+  });
 
-    it('should throw if not initialized correctly', function() {
-        expect(() => bitnacleIo({
-            constructor: {
-                name: ''
-            }
-        })).to.throw();
-    });
+  it('should throw if options.streams includes non writable streams', () => {
+    expect(() => bitnacleIo({
+      streams: ['Invalid stream'],
+    })).to.throw();
 
-    it('should throw if options.streams includes non writable streams', function() {
-        expect(() => bitnacleIo({
-            streams: [ 'Invalid stream' ]
-        })).to.throw();
+    const readableStream = fs.createReadStream(LOG_FILE);
 
-        const readableStream = fs.createReadStream(LOG_FILE);
+    expect(() => bitnacleIo({
+      streams: [readableStream],
+    })).to.throw();
 
-        expect(() => bitnacleIo({
-            streams: [ readableStream ]
-        })).to.throw();
+    readableStream._write = () => {};
+    readableStream._writableState = 'fake prop';
 
-        readableStream._write = () => {};
-        readableStream._writableState = 'fake prop'
-
-        expect(() => bitnacleIo({
-            streams: [ readableStream ]
-        })).to.throw();
-    });
+    expect(() => bitnacleIo({
+      streams: [readableStream],
+    })).to.throw();
+  });
 });
